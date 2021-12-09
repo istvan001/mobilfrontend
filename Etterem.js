@@ -23,7 +23,7 @@ export default class Etterem extends Component {
 
         });
 
-        
+        alert(JSON.stringify(this.state.dataSource))
 
       })
       .catch((error) =>{
@@ -33,7 +33,7 @@ export default class Etterem extends Component {
 
   render() {
     return (
-      <View style={{padding: 10,}}>
+      <View style={{padding: 10}}>
        <FlatList
           data={this.state.dataSource}
           renderItem={({item}) => 
