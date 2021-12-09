@@ -39,7 +39,8 @@ export default class Etterem extends Component {
           data={this.state.dataSource}
           renderItem={({item}) => 
           <View style={{borderWidth:1,borderRadius:20,marginLeft:20,marginRight:20,marginBottom:5,padding:10,paddingLeft:15,}}>
-           <Image  source={{uri: 'http://172.16.0.30:3000/kepek/'+item.kep}} style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
+           <Image  source={{uri:'http://172.16.0.30:3000/kepek/'+item.kep}} 
+           style={{width:300,height:300,marginLeft:"auto",marginRight:"auto"}} />
             <Text style={{fontSize:20,padding:3}}>{item.nev} </Text>
             <Text style={{fontSize:15,padding:3}}>{item.lakcim} </Text>
             <Text style={{fontSize:15,padding:3}}>{item.telefon} </Text>
