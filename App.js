@@ -8,8 +8,8 @@ function HomeScreen({ navigation }) {
   return (
   <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
       <Button
-        onPress={() => navigation.navigate('Notifications')}
-        title="Go to notifications"
+        onPress={() => navigation.navigate('Éttermek')}
+        title="Éttermek lap"
       />
     </View>
   );
@@ -17,7 +17,13 @@ function HomeScreen({ navigation }) {
 
 function Screen ({ navigation }) {
   return (
-  <Etterem />
+    <Etterem
+    options={{
+      headerStyle: {
+        backgroundColor: '#f4511e',
+      }
+    }}
+  />
   );
 }
 
@@ -27,8 +33,22 @@ export default function App() {
   return (
     <NavigationContainer>
       <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Kezdőlap" component={HomeScreen} />
-        <Drawer.Screen name="Éttermek" component={Screen} />
+        <Drawer.Screen name="Kezdőlap" component={HomeScreen} options={{
+  title: 'Főoldal',
+  headerStyle: {
+    backgroundColor: 'darkblue',
+  },
+  headerTintColor: '#fff',
+
+}}/>
+        <Drawer.Screen name="Éttermek" component={Screen} options={{
+  title: 'Főoldal',
+  headerStyle: {
+    backgroundColor: 'darkblue',
+  },
+  headerTintColor: '#fff',
+
+}}/>
       </Drawer.Navigator>
     </NavigationContainer>
   );
