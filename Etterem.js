@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, FlatList,Image,TouchableOpacity } from 'react-native';
+import { Text, TextInput, View, FlatList,Image,TouchableOpacity,Picker } from 'react-native';
 
 export default class Etterem extends Component {
   constructor(props) {
@@ -66,6 +66,10 @@ export default class Etterem extends Component {
             >
           <Text style={{textAlign:"center",fontSize:20,color:"white"}}>Rendezés (ABC)</Text>
           </TouchableOpacity>
+
+          
+
+          
         </View>
         
         

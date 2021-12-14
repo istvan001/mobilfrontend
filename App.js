@@ -42,7 +42,7 @@ export default function App() {
 
 }}/>
         <Drawer.Screen name="Éttermek" component={Screen} options={{
-  title: 'Főoldal',
+  title: 'Éttermek',
   headerStyle: {
     backgroundColor: 'darkblue',
   },
