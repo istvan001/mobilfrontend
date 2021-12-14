@@ -6,6 +6,8 @@ export default class Etterem extends Component {
     super(props);
     this.state = {
 
+      ert:"",
+
       dataSource:[]
     };
 
@@ -31,7 +33,7 @@ export default class Etterem extends Component {
       });
   }
 
-  kivalaszt = async(szam)=>{
+  nov = async(szam)=>{
     fetch('http://172.16.0.30:3000/etterem_abc_rend' )
       .then((response) => response.json())
       .then((responseJson) => {
@@ -50,27 +52,69 @@ export default class Etterem extends Component {
         console.error(error);
       });
   }
+  ert = async(szam)=>{
+    fetch('http://172.16.0.30:3000/etterem_ert' )
+      .then((response) => response.json())
+      .then((responseJson) => {
 
+        this.setState({
+          isLoading: false,
+          ert: responseJson,
+        }, function(){
+
+        });
+
+        
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
+
+  
+  
     
   
 
   render() {
     
     return (
-      <View style={{flex: 1, paddingTop:50,backgroundColor:"black"}}>
 
+      <View style={{flex:10,paddingTop:50,backgroundColor:"black"}}>
+        
         <View style={{marginTop:10,marginLeft:20}}>
+          
+        <TouchableOpacity
+            style={{borderWidth:1,borderRadius:10,width:200,height:35,margin:5,backgroundColor:"blue"}}
+            onPress={async ()=>this.nov()}
+            >
+          <Text style={{textAlign:"center",fontSize:20,color:"white"}}>Rendezés (ABC)↑</Text>
+          </TouchableOpacity>
           <TouchableOpacity
             style={{borderWidth:1,borderRadius:10,width:200,height:35,margin:5,backgroundColor:"blue"}}
-            onPress={async ()=>this.kivalaszt()}
+            onPress={async ()=>this.csok()}
             >
-          <Text style={{textAlign:"center",fontSize:20,color:"white"}}>Rendezés (ABC)</Text>
+          <Text style={{textAlign:"center",fontSize:20,color:"white"}}>Rendezés (ABC)↓</Text>
           </TouchableOpacity>
+          
+          <Picker
+         
+            selectedValue={this.state.rend}
+            style={{ height: 50, width: 150,margin:10 }}
+            onValueChange={(itemValue, itemIndex) => this.setState({ rend: itemValue })
+          }>
 
+            <Picker.Item label="Rendezés (ABC)↑" value="Rendezés (ABC)↑" onPress={async ()=>this.nov()} />
+            <Picker.Item label="Rendezés (ABC)↓" value="Rendezés (ABC)↓" onPress={async ()=>this.csok()} />
+          </Picker>
+        
           
 
           
         </View>
+        
+      
         
         
         <View style={{padding: 10}}>
@@ -86,6 +130,11 @@ export default class Etterem extends Component {
               <Text style={{fontSize:16,padding:3}}>Lakcím: {item.lakcim} </Text>
               <Text style={{fontSize:16,padding:3}}>Telefonszám: {item.telefon} </Text>
               <Text style={{fontSize:16,padding:3}}>Nyitvatartás: {item.nyitas} </Text>
+              <Image  source={{uri:'csillag.png'}} style={{width:500,height:300,marginLeft:"auto",marginRight:"auto"}} />
+              <Text style={{fontSize:16,padding:3}}>Értékelés:{this.state.ert} </Text>
+              
+              
+
             </View>
           }
             keyExtractor={({id}, index) =>id}
@@ -95,5 +144,6 @@ export default class Etterem extends Component {
 
       </View>
     );
+    
   }
 }
