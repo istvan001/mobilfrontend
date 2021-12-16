@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TextInput, View, FlatList,Image,TouchableOpacity,Picker } from 'react-native';
+import { Text, TextInput, View, FlatList,Image,TouchableOpacity } from 'react-native';
 
 export default class Etterem extends Component {
   constructor(props) {
@@ -35,6 +35,25 @@ export default class Etterem extends Component {
 
   nov = async(szam)=>{
     fetch('http://172.16.0.30:3000/etterem_abc_rend' )
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson,
+        }, function(){
+
+        });
+
+        
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+  }
+  csok = async(szam)=>{
+    fetch('http://172.16.0.30:3000/etterem_abc_csok' )
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -98,16 +117,7 @@ export default class Etterem extends Component {
           <Text style={{textAlign:"center",fontSize:20,color:"white"}}>Rendezés (ABC)↓</Text>
           </TouchableOpacity>
           
-          <Picker
-         
-            selectedValue={this.state.rend}
-            style={{ height: 50, width: 150,margin:10 }}
-            onValueChange={(itemValue, itemIndex) => this.setState({ rend: itemValue })
-          }>
-
-            <Picker.Item label="Rendezés (ABC)↑" value="Rendezés (ABC)↑" onPress={async ()=>this.nov()} />
-            <Picker.Item label="Rendezés (ABC)↓" value="Rendezés (ABC)↓" onPress={async ()=>this.csok()} />
-          </Picker>
+          
         
           
 
@@ -130,7 +140,6 @@ export default class Etterem extends Component {
               <Text style={{fontSize:16,padding:3}}>Lakcím: {item.lakcim} </Text>
               <Text style={{fontSize:16,padding:3}}>Telefonszám: {item.telefon} </Text>
               <Text style={{fontSize:16,padding:3}}>Nyitvatartás: {item.nyitas} </Text>
-              <Image  source={{uri:'csillag.png'}} style={{width:500,height:300,marginLeft:"auto",marginRight:"auto"}} />
               <Text style={{fontSize:16,padding:3}}>Értékelés:{this.state.ert} </Text>
               
               
