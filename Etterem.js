@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { Text, TextInput, View, FlatList,Image,TouchableOpacity } from 'react-native';
+import { SearchBar } from 'react-native-elements';
 
 export default class Etterem extends Component {
   constructor(props) {
     super(props);
     this.state = {
-
+      kereso: '',
       ert:"",
 
       dataSource:[]
@@ -13,8 +14,31 @@ export default class Etterem extends Component {
 
   }
 
+  updateSearch = (search) => {    
+    fetch('http://172.16.0.30:3000/kereses' )
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          search,
+          isLoading: false,
+          dataSource: responseJson,
+        }, function(){
+
+        });
+
+        //alert(JSON.stringify(this.state.dataSource))
+
+      })
+      .catch((error) =>{
+        console.error(error);
+      });
+    
+    
+    };
+
   componentDidMount(){
-    fetch('http://172.16.0.30:3000/etterem' )
+    fetch('http://172.16.0.30:3000/etterem2' )
       .then((response) => response.json())
       .then((responseJson) => {
 
@@ -97,12 +121,17 @@ export default class Etterem extends Component {
   
 
   render() {
-    
+    const { search } = this.state;
     return (
 
-      <View style={{flex:10,paddingTop:50,backgroundColor:"black"}}>
+      <View style={{paddingTop:50,backgroundColor:"black"}}>
+        <SearchBar       
+         placeholder="Kattints ide a kereséshez..."    
+             onChangeText={(szoveg)=>this.setState({kereso:szoveg})}        
+             value={this.state.kereso}      
+        />
         
-        <View style={{marginTop:10,marginLeft:20}}>
+        <View style={{marginTop:10,marginLeft:20,flexDirection:"row"}}>
           
         <TouchableOpacity
             style={{borderWidth:1,borderRadius:10,width:200,height:35,margin:5,backgroundColor:"blue"}}
@@ -140,7 +169,7 @@ export default class Etterem extends Component {
               <Text style={{fontSize:16,padding:3}}>Lakcím: {item.lakcim} </Text>
               <Text style={{fontSize:16,padding:3}}>Telefonszám: {item.telefon} </Text>
               <Text style={{fontSize:16,padding:3}}>Nyitvatartás: {item.nyitas} </Text>
-              <Text style={{fontSize:16,padding:3}}>Értékelés:{this.state.ert} </Text>
+              <Text style={{fontSize:16,padding:3}}>Értékelés: {item.atlag}/5 </Text>
               
               
 
