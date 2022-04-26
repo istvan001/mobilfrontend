@@ -1,2 +1,2 @@
-# mobilfrontend
-hello
+# ZaroVizsga-MobilFrontendTeljes
+Mobil (frontend) záróvizsga

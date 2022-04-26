@@ -1,55 +1,64 @@
-import * as React from 'react';
-import { Button, View } from 'react-native';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+import React, { Component } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import Etterem from './Etterem';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { Ionicons, MaterialIcons, MaterialCommunityIcons } from '@expo/vector-icons';
+import Etlapok from './Etlapok';
+import Asztalok from './Asztalok';
+import Ettermek from  './Ettermek';
+import Rendezvenyek from  './Rendezvenyek';
+const Tab = createBottomTabNavigator();
+
+export default class App extends Component {
+  render(){
+    return(
+      <NavigationContainer>
+        <Tab.Navigator>
+          <Tab.Screen name="Éttermek" component={HomeScreen} options={{
+              tabBarLabel: "Kezdőlap",
+              tabBarIcon: () => (
+                <Ionicons name="home" size={24} color="black"/>
+              ),
+            }}/>
+          <Tab.Screen name="Étlapok" component={EtlapScreen} options={{
+            tabBarIcon: () => (
+              <MaterialIcons name="restaurant-menu" size={24} color="black"/>
+            ),
+          }} />
+          <Tab.Screen name="Asztalok" component={AsztalokScreen} options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="table-chair" size={24} color="black"/>
+            ),
+          }} />
+          <Tab.Screen name="Rendezvények" component={RendezvenyekScreen} options={{
+            tabBarIcon: () => (
+              <MaterialCommunityIcons name="calendar" size={24} color="black"/>
+            ),
+          }} />
+        </Tab.Navigator>
+      </NavigationContainer>
+    );
+  }
+}
 
 function HomeScreen({ navigation }) {
-  return (
-  <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-      <Button
-        onPress={() => navigation.navigate('Éttermek')}
-        title="Éttermek lap"
-      />
-    </View>
+  return(
+    <Ettermek />
   );
 }
 
-function Screen ({ navigation }) {
+function EtlapScreen({ navigation }) {
   return (
-    <Etterem
-    options={{
-      headerStyle: {
-        backgroundColor: '#f4511e',
-      }
-    }}
-  />
+    <Etlapok />
   );
 }
 
-const Drawer = createDrawerNavigator();
-
-export default function App() {
+function AsztalokScreen({ navigation }) {
   return (
-    <NavigationContainer>
-      <Drawer.Navigator initialRouteName="Home">
-        <Drawer.Screen name="Kezdőlap" component={HomeScreen} options={{
-  title: 'Főoldal',
-  headerStyle: {
-    backgroundColor: 'darkblue',
-  },
-  headerTintColor: '#fff',
-
-}}/>
-        <Drawer.Screen name="Éttermek" component={Screen} options={{
-  title: 'Éttermek',
-  headerStyle: {
-    backgroundColor: 'darkblue',
-  },
-  headerTintColor: '#fff',
-
-}}/>
-      </Drawer.Navigator>
-    </NavigationContainer>
+    <Asztalok />
+  );
+}
+function RendezvenyekScreen({ navigation }) {
+  return (
+    <Rendezvenyek />
   );
 }
