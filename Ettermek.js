@@ -191,7 +191,7 @@ frissit=()=>
           });       
         }
   
-        like =(szam)=>
+        dislike =(szam)=>
   
       {
         

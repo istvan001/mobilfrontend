@@ -77,7 +77,7 @@ export default class FetchExample extends Component {
       .then((szoveg) => {
         
   
-        alert(szoveg)
+        
         
         this.setState({nev:""})
         this.setState({telefon:""})
@@ -117,7 +117,7 @@ export default class FetchExample extends Component {
             .then((adat) => {   
               
               adat.forEach(element => {
-                alert(element.db)  
+                
             if(element.db==1)
             {
               alert("Ez az időpont már foglalt")
